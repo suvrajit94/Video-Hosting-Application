@@ -1,10 +1,8 @@
-package com.suvrajit.config;
+package com.suvrajit.s3.config;
 
 /**
  * Created by I327917 on 12/10/2017.
  */
-
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +15,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 @Configuration
 public class S3Config {
+
     @Value("${aws.access_key_id}")
     private String awsId;
 

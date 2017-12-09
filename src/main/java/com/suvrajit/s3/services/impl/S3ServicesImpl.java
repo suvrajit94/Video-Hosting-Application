@@ -6,8 +6,8 @@
 package com.suvrajit.s3.services.impl;
 
 import com.suvrajit.s3.services.*;
-import com.suvrajit.config.S3Config;
-import com.suvrajit.config.util.Utility;
+import com.suvrajit.s3.config.S3Config;
+import com.suvrajit.s3.util.Utility;
 import java.io.File;
 import java.io.IOException;
 
@@ -28,6 +28,7 @@ import com.amazonaws.services.s3.model.S3Object;
  *
  * @author I327917
  */
+@Service
 public class S3ServicesImpl implements S3Services {
 
     private Logger logger = LoggerFactory.getLogger(S3ServicesImpl.class);
@@ -68,6 +69,9 @@ public class S3ServicesImpl implements S3Services {
         try {
 
             File file = new File(uploadFilePath);
+            logger.info("FilePath: " + uploadFilePath);
+            logger.info("Bucket name: " + bucketName);
+            logger.info("Client name: " + s3client);
             s3client.putObject(new PutObjectRequest(bucketName, keyName, file));
             logger.info("===================== Upload File - Done! =====================");
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.suvrajit.config.util;
+package com.suvrajit.s3.util;
 
 /**
  *
