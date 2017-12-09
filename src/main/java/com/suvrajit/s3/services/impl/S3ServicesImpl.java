@@ -23,6 +23,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.suvrajit.s3.Entity.UploadObj;
 
 /**
  *
@@ -65,14 +66,14 @@ public class S3ServicesImpl implements S3Services {
     }
 
     @Override
-    public void uploadFile(String keyName, String uploadFilePath) {
+    public void uploadFile(UploadObj uploadObj) {
         try {
-
+            String uploadFilePath = uploadObj.getUploadFilePath();
             File file = new File(uploadFilePath);
             logger.info("FilePath: " + uploadFilePath);
             logger.info("Bucket name: " + bucketName);
             logger.info("Client name: " + s3client);
-            s3client.putObject(new PutObjectRequest(bucketName, keyName, file));
+            s3client.putObject(new PutObjectRequest(bucketName, uploadObj.getKey(), file));
             logger.info("===================== Upload File - Done! =====================");
 
         } catch (AmazonServiceException ase) {
