@@ -40,6 +40,6 @@ public class SpringS3AmazonApplication implements CommandLineRunner {
         System.out.println(s3Services);
         s3Services.uploadFile("eula.1028.txt", uploadFilePath);
         System.out.println("---------------- START DOWNLOAD FILE ----------------");
-        s3Services.downloadFile(downloadKey);
+        s3Services.downloadFile(downloadKey); 
     }
 }
