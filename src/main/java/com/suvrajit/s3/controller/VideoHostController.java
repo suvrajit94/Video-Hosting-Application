@@ -26,7 +26,12 @@ public class VideoHostController {
     @RequestMapping(method = RequestMethod.POST, value = "/videos")
     public void uploadVideo(@RequestBody UploadObj uploadObj) {
         System.out.println(" ============ URL Reached ============");
-        System.out.println(uploadObj);
         s3Services.uploadFile(uploadObj);
+    }
+    
+    @RequestMapping (method = RequestMethod.DELETE, value = "/videos/{key}")
+    public void deleteVideo(@PathVariable String key){
+        System.out.println(" ============ URL Reached ============");
+        s3Services.deleteFile(key);
     }
 }

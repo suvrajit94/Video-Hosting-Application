@@ -14,4 +14,5 @@ import com.suvrajit.s3.Entity.UploadObj;
 public interface S3Services {
     public void downloadFile(String keyName);
     public void uploadFile(UploadObj uploadObj);
+    public void deleteFile(String keyName);
 }
