@@ -38,7 +38,7 @@ public class SpringS3AmazonApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("---------------- START UPLOAD FILE ----------------");
         System.out.println(s3Services);
-        s3Services.uploadFile("Capture.png", uploadFilePath);
+        s3Services.uploadFile("eula.1028.txt", uploadFilePath);
         System.out.println("---------------- START DOWNLOAD FILE ----------------");
         s3Services.downloadFile(downloadKey);
     }
