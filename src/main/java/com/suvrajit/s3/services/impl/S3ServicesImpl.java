@@ -149,8 +149,8 @@ public class S3ServicesImpl implements S3Services {
             CreateJobResult createJobResult = transcoderJobCreationService.createJob(keyName, encoding);
             logger.info("Successfully created job: " + createJobResult.getJob().getId());
             logger.info("Output Bucket Name: " + outputBucketName);
-            logger.info("key name: " + keyName + "_transcoded");
-            return s3client.getObject(new GetObjectRequest(outputBucketName, keyName + "_transcoded"));
+            logger.info("key name: " + keyName + "-transcoded");
+            return s3client.getObject(new GetObjectRequest(outputBucketName, keyName + "-transcoded"));
         } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
             logger.info("Error Message:    " + ase.getMessage());

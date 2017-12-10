@@ -39,7 +39,7 @@ public class TranscoderJobCreationService {
             JobInput jobInput = new JobInput();
             jobInput.withKey(keyName).withFrameRate("auto").withContainer("auto").setAspectRatio("auto");
             CreateJobOutput createJobOutput = new CreateJobOutput();
-            createJobOutput.withKey(keyName + "_transcoded").setPresetId("1351620000001-000050");
+            createJobOutput.withKey(keyName + "-transcoded").setPresetId("1351620000001-000050");
             createJobRequest.withInput(jobInput).withOutput(createJobOutput).setPipelineId(pipelineId);
             System.out.println(aWSTrancoderClient.getAmazonElasticTranscoderClient());
             return aWSTrancoderClient.getAmazonElasticTranscoderClient().createJob(createJobRequest);
