@@ -17,4 +17,5 @@ public interface S3Services {
     public void uploadFile(UploadObj uploadObj);
     public void deleteFile(String keyName);
     public S3Object viewFile(String keyName);
+    public S3Object viewFile (String keyName, String encoding);
 }

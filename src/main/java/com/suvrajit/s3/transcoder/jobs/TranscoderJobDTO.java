@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.suvrajit.s3.transcoder.jobs;
+
+import com.amazonaws.services.elastictranscoder.model.CreateJobOutput;
+import com.amazonaws.services.elastictranscoder.model.CreateJobRequest;
+import com.amazonaws.services.elastictranscoder.model.CreateJobResult;
+import com.amazonaws.services.elastictranscoder.model.JobInput;
+import com.suvrajit.s3.transcoder.client.AWSTrancoderClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author I327917
+ */
+@Service
+public class TranscoderJobDTO {
+
+    @Autowired
+    private AWSTrancoderClient aWSTrancoderClient;
+
+    @Value("${aws.transcoder.pipeline.id}")
+    private String pipelineId;
+
+    public CreateJobResult createJob(String keyName, String presetId) {
+        try {
+            aWSTrancoderClient.setAmazonElasticTranscoderClient();
+            CreateJobRequest createJobRequest = new CreateJobRequest();
+            JobInput jobInput = new JobInput();
+            jobInput.withKey(keyName).withFrameRate("auto").withContainer("auto").setAspectRatio("auto");
+            CreateJobOutput createJobOutput = new CreateJobOutput();
+            createJobOutput.withKey(keyName + "_transcoded").setPresetId("1351620000001-000050");
+            createJobRequest.withInput(jobInput).withOutput(createJobOutput).setPipelineId(pipelineId);
+            System.out.println(aWSTrancoderClient.getAmazonElasticTranscoderClient());
+            return aWSTrancoderClient.getAmazonElasticTranscoderClient().createJob(createJobRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

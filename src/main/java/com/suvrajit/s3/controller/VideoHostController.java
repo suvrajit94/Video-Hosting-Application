@@ -31,6 +31,12 @@ public class VideoHostController {
         return s3Services.viewFile(key).getObjectContent();
     }
     
+    @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}/{encoding}")
+    public S3ObjectInputStream getVideo(@PathVariable String key, @PathVariable String encoding){
+        System.out.println(" ============ URL Reached ============");
+        return s3Services.viewFile(key,encoding).getObjectContent();
+    }
+    
     @RequestMapping(method = RequestMethod.POST, value = "/videos")
     public void uploadVideo(@RequestBody UploadObj uploadObj) {
         System.out.println(" ============ URL Reached ============");

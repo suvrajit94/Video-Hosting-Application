@@ -19,13 +19,16 @@ import org.springframework.stereotype.Service;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.elastictranscoder.model.CreateJobResult;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.suvrajit.s3.Entity.UploadObj;
+import com.suvrajit.s3.transcoder.jobs.TranscoderJobDTO;
 
 /**
  *
@@ -39,8 +42,14 @@ public class S3ServicesImpl implements S3Services {
     @Autowired
     private AmazonS3 s3client;
 
+    @Autowired
+    private TranscoderJobDTO transcoderJobDto;
+
     @Value("${s3.bucket}")
     private String bucketName;
+    
+    @Value("${s3.bucket.output}")
+    private String outputBucketName;
 
     @Override
     public void downloadFile(String keyName) {
@@ -90,9 +99,9 @@ public class S3ServicesImpl implements S3Services {
         }
 
     }
-    
+
     @Override
-    public void deleteFile(String keyName){
+    public void deleteFile(String keyName) {
         try {
 
             System.out.println("Deleting an object");
@@ -112,12 +121,12 @@ public class S3ServicesImpl implements S3Services {
             logger.info("Error Message: " + ace.getMessage());
         }
     }
-    
+
     @Override
-    public S3Object viewFile(String keyName){
+    public S3Object viewFile(String keyName) {
         try {
 
-            System.out.println("Downloading an object");
+            System.out.println("Viewing an object");
             return s3client.getObject(new GetObjectRequest(bucketName, keyName));
         } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
@@ -129,7 +138,28 @@ public class S3ServicesImpl implements S3Services {
         } catch (AmazonClientException ace) {
             logger.info("Caught an AmazonClientException: ");
             logger.info("Error Message: " + ace.getMessage());
-        } 
+        }
+        return null;
+    }
+
+    @Override
+    public S3Object viewFile(String keyName, String encoding) {
+        try {
+            System.out.println("Viewing an object");
+            CreateJobResult createJobResult = transcoderJobDto.createJob(keyName, encoding);
+            logger.info("Successfully created job: " + createJobResult.getJob().getId());
+            return AmazonS3Client.builder().withRegion("ap-south-1").build().getObject(new GetObjectRequest(outputBucketName, keyName + "_transcoded"));
+        } catch (AmazonServiceException ase) {
+            logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
+            logger.info("Error Message:    " + ase.getMessage());
+            logger.info("HTTP Status Code: " + ase.getStatusCode());
+            logger.info("AWS Error Code:   " + ase.getErrorCode());
+            logger.info("Error Type:       " + ase.getErrorType());
+            logger.info("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            logger.info("Caught an AmazonClientException: ");
+            logger.info("Error Message: " + ace.getMessage());
+        }
         return null;
     }
 
