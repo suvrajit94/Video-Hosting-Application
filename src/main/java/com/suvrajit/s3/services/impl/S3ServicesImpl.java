@@ -28,7 +28,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.suvrajit.s3.Entity.UploadObj;
-import com.suvrajit.s3.transcoder.jobs.TranscoderJobDTO;
+import com.suvrajit.s3.transcoder.jobs.TranscoderJobCreationService;
 
 /**
  *
@@ -43,7 +43,7 @@ public class S3ServicesImpl implements S3Services {
     private AmazonS3 s3client;
 
     @Autowired
-    private TranscoderJobDTO transcoderJobDto;
+    private TranscoderJobCreationService transcoderJobCreationService;
 
     @Value("${s3.bucket}")
     private String bucketName;
@@ -146,9 +146,11 @@ public class S3ServicesImpl implements S3Services {
     public S3Object viewFile(String keyName, String encoding) {
         try {
             System.out.println("Viewing an object");
-            CreateJobResult createJobResult = transcoderJobDto.createJob(keyName, encoding);
+            CreateJobResult createJobResult = transcoderJobCreationService.createJob(keyName, encoding);
             logger.info("Successfully created job: " + createJobResult.getJob().getId());
-            return AmazonS3Client.builder().withRegion("ap-south-1").build().getObject(new GetObjectRequest(outputBucketName, keyName + "_transcoded"));
+            logger.info("Output Bucket Name: " + outputBucketName);
+            logger.info("key name: " + keyName + "_transcoded");
+            return s3client.getObject(new GetObjectRequest(outputBucketName, keyName + "_transcoded"));
         } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
             logger.info("Error Message:    " + ase.getMessage());

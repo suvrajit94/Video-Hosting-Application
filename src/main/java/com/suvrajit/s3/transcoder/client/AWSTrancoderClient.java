@@ -10,6 +10,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClientBuilder;
 import com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -21,16 +22,24 @@ import org.springframework.stereotype.Service;
 public class AWSTrancoderClient {
     private AmazonElasticTranscoderClient amazonElasticTranscoderClient;
 
+    @Value("${aws.access_key_id}")
+    private String access_key;
+    
+    @Value("${aws.secret_access_key}")
+    private String secret_key;
+    
+    @Value("${s3.region}")
+    private String region;
+    
     public AmazonElasticTranscoderClient getAmazonElasticTranscoderClient() {
         return amazonElasticTranscoderClient;
     }
 
     public void setAmazonElasticTranscoderClient() {
-        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIDHI3QUZWQJB5F3A", "kKAzs3Lrey6bGCIQrZ57SOlNBJ5R+ud+kzq1teU6");
-        this.amazonElasticTranscoderClient = (AmazonElasticTranscoderClient) AmazonElasticTranscoderClient.builder().withRegion("ap-south-1")
+        BasicAWSCredentials creds = new BasicAWSCredentials(access_key, secret_key);
+        this.amazonElasticTranscoderClient = (AmazonElasticTranscoderClient) AmazonElasticTranscoderClient.builder().withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(creds))
                 .build();
-//        this.amazonElasticTranscoderClient.
     }
 
     

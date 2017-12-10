@@ -10,6 +10,8 @@ import com.amazonaws.services.elastictranscoder.model.CreateJobRequest;
 import com.amazonaws.services.elastictranscoder.model.CreateJobResult;
 import com.amazonaws.services.elastictranscoder.model.JobInput;
 import com.suvrajit.s3.transcoder.client.AWSTrancoderClient;
+import java.util.HashMap;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,13 +22,15 @@ import org.springframework.stereotype.Service;
  * @author I327917
  */
 @Service
-public class TranscoderJobDTO {
+public class TranscoderJobCreationService {
 
     @Autowired
     private AWSTrancoderClient aWSTrancoderClient;
 
     @Value("${aws.transcoder.pipeline.id}")
     private String pipelineId;
+    
+    private HashMap<String,String> presetMap;
 
     public CreateJobResult createJob(String keyName, String presetId) {
         try {
