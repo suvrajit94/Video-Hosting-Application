@@ -112,5 +112,25 @@ public class S3ServicesImpl implements S3Services {
             logger.info("Error Message: " + ace.getMessage());
         }
     }
+    
+    @Override
+    public S3Object viewFile(String keyName){
+        try {
+
+            System.out.println("Downloading an object");
+            return s3client.getObject(new GetObjectRequest(bucketName, keyName));
+        } catch (AmazonServiceException ase) {
+            logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
+            logger.info("Error Message:    " + ase.getMessage());
+            logger.info("HTTP Status Code: " + ase.getStatusCode());
+            logger.info("AWS Error Code:   " + ase.getErrorCode());
+            logger.info("Error Type:       " + ase.getErrorType());
+            logger.info("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            logger.info("Caught an AmazonClientException: ");
+            logger.info("Error Message: " + ace.getMessage());
+        } 
+        return null;
+    }
 
 }
