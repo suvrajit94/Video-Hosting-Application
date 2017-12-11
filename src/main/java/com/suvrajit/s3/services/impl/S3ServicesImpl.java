@@ -27,6 +27,7 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.suvrajit.s3.Entity.UploadObj;
 import com.suvrajit.s3.transcoder.jobs.TranscoderJobCreationService;
 
@@ -123,11 +124,11 @@ public class S3ServicesImpl implements S3Services {
     }
 
     @Override
-    public S3Object viewFile(String keyName) {
+    public S3ObjectInputStream viewFile(String keyName) {
         try {
 
             System.out.println("Viewing an object");
-            return s3client.getObject(new GetObjectRequest(bucketName, keyName));
+            return s3client.getObject(new GetObjectRequest(bucketName, keyName)).getObjectContent();
         } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
             logger.info("Error Message:    " + ase.getMessage());
@@ -143,14 +144,14 @@ public class S3ServicesImpl implements S3Services {
     }
 
     @Override
-    public S3Object viewFile(String keyName, String encoding) {
+    public S3ObjectInputStream viewFile(String keyName, String encoding) {
         try {
             System.out.println("Viewing an object");
             CreateJobResult createJobResult = transcoderJobCreationService.createJob(keyName, encoding);
             logger.info("Successfully created job: " + createJobResult.getJob().getId());
             logger.info("Output Bucket Name: " + outputBucketName);
-            logger.info("key name: " + keyName + "-transcoded");
-            return s3client.getObject(new GetObjectRequest(outputBucketName, keyName + "-transcoded"));
+            logger.info("key name: " + keyName + "-transcoded-" + encoding);
+            return s3client.getObject(new GetObjectRequest(outputBucketName, keyName + "-transcoded-" + encoding)).getObjectContent();
         } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
             logger.info("Error Message:    " + ase.getMessage());

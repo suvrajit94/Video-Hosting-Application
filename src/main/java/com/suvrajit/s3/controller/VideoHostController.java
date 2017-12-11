@@ -28,13 +28,13 @@ public class VideoHostController {
     @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}")
     public S3ObjectInputStream getVideo(@PathVariable String key){
         System.out.println(" ============ URL Reached ============");
-        return s3Services.viewFile(key).getObjectContent();
+        return s3Services.viewFile(key);
     }
     
     @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}/{encoding}")
     public S3ObjectInputStream getVideo(@PathVariable String key, @PathVariable String encoding){
         System.out.println(" ============ URL Reached ============");
-        return s3Services.viewFile(key,encoding).getObjectContent();
+        return s3Services.viewFile(key,encoding);
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/videos")

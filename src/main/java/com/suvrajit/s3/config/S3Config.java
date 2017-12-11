@@ -12,6 +12,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import java.util.HashMap;
 
 @Configuration
 public class S3Config {
@@ -35,5 +36,15 @@ public class S3Config {
                 .build();
 
         return s3Client;
+    }
+    
+    @Bean
+    public HashMap<String,String> presetMap() {
+       HashMap<String, String> presetMap = new HashMap<String, String>();
+       presetMap.put("360p", "1351620000001-000050");
+       presetMap.put("480p", "1351620000001-000020");
+       presetMap.put("720p", "1351620000001-000010");
+       presetMap.put("1080p", "1351620000001-000001");
+       return presetMap;
     }
 }
