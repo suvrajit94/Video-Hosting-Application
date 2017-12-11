@@ -5,11 +5,14 @@
  */
 package com.suvrajit.s3.services;
 
+import com.suvrajit.s3.Entity.UploadObj;
+
 /**
  *
  * @author I327917
  */
 public interface S3Services {
     public void downloadFile(String keyName);
-    public void uploadFile(String keyName, String uploadFilePath);
+    public void uploadFile(UploadObj uploadObj);
+    public void deleteFile(String keyName);
 }
