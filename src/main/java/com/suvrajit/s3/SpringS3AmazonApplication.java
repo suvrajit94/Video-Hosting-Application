@@ -21,12 +21,12 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * @author I327917
  */
 @SpringBootApplication
-public class SpringS3AmazonApplication extends SpringBootServletInitializer{
+public class SpringS3AmazonApplication{
 //    SpringBootServletInitializer
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SpringS3AmazonApplication .class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(SpringS3AmazonApplication .class);
+//    }
     
     public static void main(String[] args) {
         SpringApplication.run(SpringS3AmazonApplication.class, args);

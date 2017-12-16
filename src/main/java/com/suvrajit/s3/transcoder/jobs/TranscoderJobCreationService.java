@@ -10,6 +10,7 @@ import com.amazonaws.services.elastictranscoder.model.CreateJobRequest;
 import com.amazonaws.services.elastictranscoder.model.CreateJobResult;
 import com.amazonaws.services.elastictranscoder.model.JobInput;
 import com.suvrajit.s3.transcoder.client.AWSTrancoderClient;
+import com.suvrajit.s3.util.KeyGenerator;
 import java.util.HashMap;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,8 @@ public class TranscoderJobCreationService {
             JobInput jobInput = new JobInput();
             jobInput.withKey(keyName).withFrameRate("auto").withContainer("auto").setAspectRatio("auto");
             CreateJobOutput createJobOutput = new CreateJobOutput();
-            createJobOutput.withKey(keyName + "-transcoded-" + presetId).setPresetId(presetMap.get(presetId));
+            String newKey = KeyGenerator.parseKeyName(keyName, presetId);
+            createJobOutput.withKey(newKey).setPresetId(presetMap.get(presetId));
             createJobRequest.withInput(jobInput).withOutput(createJobOutput).setPipelineId(pipelineId);
             System.out.println(aWSTrancoderClient.getAmazonElasticTranscoderClient());
             return aWSTrancoderClient.getAmazonElasticTranscoderClient().createJob(createJobRequest);
@@ -49,4 +51,6 @@ public class TranscoderJobCreationService {
         }
         return null;
     }
+    
+    
 }

@@ -14,24 +14,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author I327917
  */
 @Component
 public class AWSTrancoderClient {
+
     private AmazonElasticTranscoderClient amazonElasticTranscoderClient;
 
     @Value("${aws.access_key_id}")
     private String access_key;
-    
+
     @Value("${aws.secret_access_key}")
     private String secret_key;
-    
+
     @Value("${s3.region}")
     private String region;
-    
+
     public AmazonElasticTranscoderClient getAmazonElasticTranscoderClient() {
         return amazonElasticTranscoderClient;
     }
@@ -43,8 +43,4 @@ public class AWSTrancoderClient {
                 .build();
     }
 
-    
-    
-    
-    
 }
