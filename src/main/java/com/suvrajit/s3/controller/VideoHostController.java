@@ -5,6 +5,8 @@
  */
 package com.suvrajit.s3.controller;
 
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.suvrajit.s3.Entity.UploadObj;
 import com.suvrajit.s3.services.S3Services;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,18 @@ public class VideoHostController {
     @Autowired
     S3Services s3Services;
     
+    @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}")
+    public S3ObjectInputStream getVideo(@PathVariable String key){
+        System.out.println(" ============ URL Reached ============");
+        return s3Services.viewFile(key);
+    }
+    
+    @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}/{encoding}")
+    public S3ObjectInputStream getVideo(@PathVariable String key, @PathVariable String encoding){
+        System.out.println(" ============ URL Reached ============");
+        return s3Services.viewFile(key,encoding);
+    }
+    
     @RequestMapping(method = RequestMethod.POST, value = "/videos")
     public void uploadVideo(@RequestBody UploadObj uploadObj) {
         System.out.println(" ============ URL Reached ============");
@@ -33,5 +47,11 @@ public class VideoHostController {
     public void deleteVideo(@PathVariable String key){
         System.out.println(" ============ URL Reached ============");
         s3Services.deleteFile(key);
+    }
+    
+    @RequestMapping (method = RequestMethod.GET, value = "/videos/{key}/download")
+    public void downloadVideo(@PathVariable String key){
+        System.out.println(" ============ URL Reached ============");
+        s3Services.downloadFile(key);
     }
 }

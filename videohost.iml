@@ -56,7 +56,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.13.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.8.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.5" level="project" />
@@ -65,7 +64,6 @@
     <orderEntry type="library" name="Maven: org.apache.derby:derby:10.12.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-servicediscovery:1.11.245" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-cloud9:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-serverlessapplicationrepository:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-alexaforbusiness:1.11.245" level="project" />
@@ -128,7 +126,6 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elasticloadbalancingv2:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-emr:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elasticache:1.11.245" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elastictranscoder:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-ec2:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-dynamodb:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-sns:1.11.245" level="project" />
@@ -202,5 +199,8 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-models:1.11.245" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-swf-libraries:1.11.22" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-elastictranscoder:1.11.222" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.222" level="project" />
   </component>
 </module>

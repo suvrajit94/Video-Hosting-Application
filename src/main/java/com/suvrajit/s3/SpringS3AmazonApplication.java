@@ -13,14 +13,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.suvrajit.s3.services.S3Services;
 import com.suvrajit.s3.services.impl.S3ServicesImpl;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
  *
  * @author I327917
  */
 @SpringBootApplication
-public class SpringS3AmazonApplication {
-
+public class SpringS3AmazonApplication extends SpringBootServletInitializer{
+//    SpringBootServletInitializer
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SpringS3AmazonApplication .class);
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(SpringS3AmazonApplication.class, args);
     }
